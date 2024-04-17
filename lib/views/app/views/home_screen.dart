@@ -1,10 +1,16 @@
-import 'package:flewly/consts/app_colors.dart';
+import 'package:fjaiq/views/quiz/views/question_screen.dart';
+import 'package:fjaiq/views/quiz/views/quiz_screen.dart';
+import 'package:fjaiq/views/settings/views/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+import '../../../consts/app_colors.dart';
+
 import '../../../data/model/news_model.dart';
-import '../../flight/views/flight_screen.dart';
+import '../../../data/model/quiz_model.dart';
+import '../../mini_game/views/mini_game_screen.dart';
 import '../../news/views/news_screen.dart';
-import '../../settings/views/settings_screen.dart';
+import '../../operation/views/operation_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,11 +22,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
   List<Widget> homeWidgets = [
-    FlightScreen(),
+    FinanceScreen(),
+
     NewsScreen(
       newsModel: news,
     ),
+    MiniGameScreen(),
+    QuizScreen(),
     SettingsScreen(),
+    // const ProfileScreen()
   ];
 
   @override
@@ -32,41 +42,74 @@ class _HomeScreenState extends State<HomeScreen> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              height: size.height * 0.025,
-              currentIndex == 0
-                  ? 'assets/icons/home_blue.svg'
-                  : 'assets/icons/home.svg',
+              'assets/icons/finance.svg',
+              width: size.height * 0.032,
+              height: size.height * 0.032,
+              color: currentIndex == 0
+                  ? AppColors.greenColor
+                  : AppColors.whiteColor,
             ),
-            label: 'cars',
+            label: 'Главная',
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              height: size.height * 0.025,
-              currentIndex == 1
-                  ? 'assets/icons/news_blue.svg'
-                  : 'assets/icons/news.svg',
+              'assets/icons/news.svg',
+              width: size.height * 0.032,
+              height: size.height * 0.032,
+              color: currentIndex == 1
+                  ? AppColors.greenColor
+                  : AppColors.whiteColor,
             ),
-            label: 'news',
+            label: 'Новости',
           ),
           BottomNavigationBarItem(
               icon: SvgPicture.asset(
-                height: size.height * 0.025,
-                currentIndex == 2
-                    ? 'assets/icons/settings_blue.svg'
-                    : 'assets/icons/settings.svg',
+                'assets/icons/game.svg',
+                width: size.height * 0.032,
+                height: size.height * 0.032,
+                color: currentIndex == 2
+                    ? AppColors.greenColor
+                    : AppColors.whiteColor,
               ),
-              label: 'settings'),
+              label: 'Калькулятор'),
+          BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                'assets/icons/quiz.svg',
+                width: size.height * 0.032,
+                height: size.height * 0.032,
+                color: currentIndex == 3
+                    ? AppColors.greenColor
+                    : AppColors.whiteColor,
+              ),
+              label: 'Операции'),
+          BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                'assets/icons/settings.svg',
+                width: size.height * 0.032,
+                height: size.height * 0.032,
+                color: currentIndex == 4
+                    ? AppColors.greenColor
+                    : AppColors.whiteColor,
+              ),
+              label: ''),
         ],
         onTap: (index) {
           setState(() {
             currentIndex = index;
           });
         },
-        backgroundColor: AppColors.greyColor,
         type: BottomNavigationBarType.fixed,
-        unselectedItemColor: Colors.white,
+        backgroundColor: AppColors.blackColor,
+        unselectedItemColor: AppColors.whiteColor,
+        selectedItemColor: AppColors.orangeColor,
         showSelectedLabels: false,
         showUnselectedLabels: false,
+        selectedLabelStyle: const TextStyle(
+            // color: AppColors.lightBlueColor,
+            ),
+        unselectedLabelStyle: const TextStyle(
+          color: AppColors.blackColor,
+        ),
       ),
     );
   }

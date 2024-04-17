@@ -1,10 +1,10 @@
-import 'package:flewly/views/settings/widgets/ios_toggle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../consts/app_colors.dart';
 import '../../../consts/app_text_styles/settings_text_style.dart';
 import '../../app/views/my_in_app_web_view.dart';
 import '../../app/widgets/chosen_action_button_widget.dart';
+import '../widgets/ios_toggle.dart';
 import '../widgets/settings_widget.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -32,21 +32,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: AppColors.greyColor,
+        backgroundColor: AppColors.blackColor,
       ),
       body: Container(
-        color: AppColors.greyColor,
+        color: AppColors.blackColor,
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
                   height: size.height * 0.1,
                 ),
                 Text(
-                  'SETTINGS',
+                  'Settings',
                   style: SettingsTextStyle.title,
                 ),
                 SizedBox(
@@ -55,15 +55,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Container(
                   width: size.width * 0.95,
                   decoration: BoxDecoration(
-                    color: AppColors.lightGreyColor,
+                    // color: AppColors.lightGreyColor,
                     borderRadius: BorderRadius.circular(5.0),
                   ),
-                  child: SingleChildScrollView(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
-                          height: size.height * 0.005,
+                          height: size.height * 0.01,
                         ),
                         Text(
                           'Your opinion is important!',
@@ -73,13 +77,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           height: size.height * 0.005,
                         ),
                         Text(
-                          'We need your feedback\nto get better',
+                          'We need your feedback',
                           style: SettingsTextStyle.bannerSubTitle,
                         ),
-                        SizedBox(
-                          height: size.height * 0.005,
-                        ),
-                        SvgPicture.asset('assets/images/settings.svg'),
                         SizedBox(
                           height: size.height * 0.005,
                         ),
@@ -116,7 +116,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                       );
                     },
-                    assetName: 'assets/icons/privacy.svg'),
+                    action: SvgPicture.asset('assets/icons/arrow.svg'),
+                    assetName: 'assets/icons/terms.svg'),
                 SizedBox(
                   height: size.height * 0.01,
                 ),
@@ -131,17 +132,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                       );
                     },
-                    action: IOSStyleToggle(
-                      value: isSwitched,
-                      onChanged: (value) {
-                        setState(() {
-                          isSwitched = value;
-                        });
-                      },
-                    ),
-                    assetName: 'assets/icons/notification.svg'),
+                    action: SvgPicture.asset('assets/icons/arrow.svg'),
+                    assetName: 'assets/icons/privacy.svg'),
+                SettingsTile(
+                    text: 'Notification',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const MyScreenForVIew(url: 'https://google.com/'),
+                        ),
+                      );
+                    },
+                    action: SvgPicture.asset('assets/icons/arrow.svg'),
+                    assetName: 'assets/icons/support.svg'),
                 SizedBox(
-                  height: size.height * 0.01,
+                  height: size.height * 0.4,
                 ),
               ],
             ),

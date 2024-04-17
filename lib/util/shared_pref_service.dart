@@ -3,22 +3,25 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../data/model/rental.dart';
 
 class SharedPreferencesService {
-  static const String _rentedBoatKey = 'vending_machines';
+  static const String _operationsKey = 'operations';
 
-  Future<void> saveRentedBoat(List<Rental> rentedBoat) async {
+  static Future<void> saveOperations(
+      List<Map<String, dynamic>> operations) async {
     final prefs = await SharedPreferences.getInstance();
-    final rentedBoatJson =
-        jsonEncode(rentedBoat.map((vm) => vm.toJson()).toList());
-    await prefs.setString(_rentedBoatKey, rentedBoatJson);
+    final String operationsJson = json.encode(operations);
+    await prefs.setString(_operationsKey, operationsJson);
   }
 
-  Future<List<Rental>> getRentedBoat() async {
+  static Future<List<Map<String, dynamic>>> loadOperations() async {
     final prefs = await SharedPreferences.getInstance();
-    final rentedBoatJson = prefs.getString(_rentedBoatKey);
-    if (rentedBoatJson != null) {
-      final List<dynamic> rentedBoatList = jsonDecode(rentedBoatJson);
-      return rentedBoatList.map((json) => Rental.fromJson(json)).toList();
+    final String? operationsJson = prefs.getString(_operationsKey);
+    if (operationsJson != null) {
+      final List<dynamic> operationsList = json.decode(operationsJson);
+      return operationsList
+          .map((operationMap) => Map<String, dynamic>.from(operationMap))
+          .toList();
+    } else {
+      return [];
     }
-    return [];
   }
 }

@@ -16,6 +16,7 @@ class ArticleScreen extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.blackColor,
         elevation: 0,
         titleSpacing: -5,
         title: const Text(
@@ -35,7 +36,7 @@ class ArticleScreen extends StatelessWidget {
         ),
       ),
       body: Container(
-        //   color: AppColors.blackColor,
+        color: AppColors.blackColor,
         child: Column(
           children: [
             SizedBox(
@@ -60,13 +61,13 @@ class ArticleScreen extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12.0),
-                      color: AppColors.blueColor,
+                      //  color: AppColors.blueColor,
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Business news',
-                        style: NewsTextStyle.business,
+                        //  style: NewsTextStyle.business,
                       ),
                     ),
                   ),

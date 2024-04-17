@@ -16,15 +16,15 @@ class NewsScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: AppColors.darkGreyColor.withOpacity(0.06),
+          backgroundColor: AppColors.blackColor,
         ),
         body: Container(
-          color: AppColors.darkGreyColor.withOpacity(0.06),
+          color: AppColors.blackColor,
           child: Column(children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: size.height * 0.018),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     'News',

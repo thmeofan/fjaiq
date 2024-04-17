@@ -8,7 +8,7 @@ class ChosenActionButton extends StatelessWidget {
     Key? key,
     required this.text,
     required this.onTap,
-    this.backgroundColor = AppColors.blueColor,
+    this.backgroundColor = AppColors.greenColor,
   }) : super(key: key);
 
   final String text;

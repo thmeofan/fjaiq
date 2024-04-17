@@ -22,24 +22,18 @@ class NewsWidget extends StatelessWidget {
               .pushNamed(AppRoutes.article, arguments: newsModel);
         },
         child: Container(
-          height: screenSize.height * 0.49,
+          height: screenSize.height * 0.4,
           width: double.maxFinite,
-          // padding: EdgeInsets.symmetric(vertical: screenSize.width * 0.005),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15.0),
-            color: Colors.white,
+            color: AppColors.blackColor,
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(10.0),
+              bottomRight: Radius.circular(10.0),
+            ),
+            border: Border(top: BorderSide(color: Colors.grey, width: 1.0)),
           ),
           child: Column(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(15.0),
-                child: FancyShimmerImage(
-                  width: screenSize.width,
-                  height: screenSize.height * 0.235,
-                  boxFit: BoxFit.cover,
-                  imageUrl: newsModel.imageUrl,
-                ),
-              ),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(1.0),
@@ -54,32 +48,20 @@ class NewsWidget extends StatelessWidget {
                           style: NewsTextStyle.title,
                         ),
                       ),
-                      Spacer(),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: screenSize.width * 0.58,
-                          ),
-                          Container(
-                            height: screenSize.height * 0.045,
-                            width: screenSize.width * 0.32,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: AppColors.blueColor.withOpacity(0.05)),
-                            child: Center(
-                              child: Text(
-                                'Open news',
-                                style: NewsTextStyle.read,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
                       SizedBox(
                         height: screenSize.height * 0.005,
                       )
                     ],
                   ),
+                ),
+              ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: FancyShimmerImage(
+                  width: screenSize.width,
+                  height: screenSize.height * 0.235,
+                  boxFit: BoxFit.cover,
+                  imageUrl: newsModel.imageUrl,
                 ),
               ),
             ],

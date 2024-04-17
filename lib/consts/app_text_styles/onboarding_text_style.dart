@@ -28,6 +28,6 @@ class OnboardingTextStyle {
     fontFamily: 'Roboto',
     fontSize: 17.0,
     fontWeight: FontWeight.w500,
-    color: Colors.white,
+    color: Colors.black,
   );
 }

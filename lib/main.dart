@@ -1,9 +1,14 @@
+import 'package:fjaiq/blocs/onboarding_cubit/onboarding_cubit.dart';
+import 'package:fjaiq/util/app_routes.dart';
+import 'package:fjaiq/util/shared_pref_service.dart';
+import 'package:fjaiq/views/app/views/screen_new.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'blocs/rental_cubit/rental_cubit.dart';
+import 'consts/app_colors.dart';
 import 'data/repository/onboarding_repository.dart';
 import 'firebase_options.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -19,41 +24,38 @@ Future<void> main() async {
   String privacyPolicyLink = await fetchPrivacyPolicyLink();
   bool isFirstTime = await checkFirstLaunch();
 
-  runApp(BlocProvider(
-    create: (context) => RentalCubit(SharedPreferencesService()),
-    child: FutureBuilder(
-      future: fetchPrivacyPolicyLink(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            home: Scaffold(
-              body: Container(
-                color: AppColors.brownColor,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
+  runApp(FutureBuilder(
+    future: fetchPrivacyPolicyLink(),
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: Scaffold(
+            body: Container(
+              color: AppColors.blackColor,
+              child: Center(
+                child: CircularProgressIndicator(),
               ),
             ),
-          );
-        } else if (snapshot.hasError) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            home: Scaffold(
-              body: Center(
-                child: Text('Error: ${snapshot.error}'),
-              ),
+          ),
+        );
+      } else if (snapshot.hasError) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: Scaffold(
+            body: Center(
+              child: Text('Error: ${snapshot.error}'),
             ),
-          );
-        } else {
-          String privacyPolicyLink = snapshot.data ?? '';
-          return MyApp(
-            isFirstLaunch: isFirstTime,
-            privacyPolicyLink: privacyPolicyLink,
-          );
-        }
-      },
-    ),
+          ),
+        );
+      } else {
+        String privacyPolicyLink = snapshot.data ?? '';
+        return MyApp(
+          isFirstLaunch: isFirstTime,
+          privacyPolicyLink: privacyPolicyLink,
+        );
+      }
+    },
   ));
 }
 
