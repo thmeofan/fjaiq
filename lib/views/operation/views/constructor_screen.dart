@@ -14,7 +14,7 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
   final _descriptionController = TextEditingController();
   final _amountController = TextEditingController();
   final _dateController = TextEditingController();
-  final _commentController = TextEditingController();
+//  final _commentController = TextEditingController();
   String _operationType = 'Income';
   List<bool> _isSelected = [true, false];
 
@@ -35,7 +35,7 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
       final description = _descriptionController.text;
       final amount = double.tryParse(_amountController.text);
       final date = _dateController.text;
-      final comment = _commentController.text;
+      //  final comment = _commentController.text;
 
       if (description.isEmpty || amount == null || date.isEmpty) {
         _showErrorSnackBar('Make sure you filled all the fields');
@@ -49,7 +49,7 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
         'amount': amount,
         'type': _operationType,
         'date': date,
-        'comment': comment,
+        //  'comment': comment,
       };
 
       Navigator.of(context).pop(operation);
@@ -90,7 +90,7 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
     _descriptionController.dispose();
     _amountController.dispose();
     _dateController.dispose();
-    _commentController.dispose();
+    //  _commentController.dispose();
     super.dispose();
   }
 
@@ -196,10 +196,6 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
                             label: 'Date',
                           ),
                         ),
-                      ),
-                      InputWidget(
-                        controller: _commentController,
-                        label: 'Comment',
                       ),
                       SizedBox(height: 16.0),
                       ChosenActionButton(

@@ -21,41 +21,44 @@ class InputWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(4)),
-      ),
-      child: TextField(
-        style: ConstructorTextStyle.inputText,
-        controller: controller,
-        keyboardType: keyboardType,
-        decoration: InputDecoration(
-          filled: true,
-          //   fillColor: AppColors.lightGreyColor,
-          labelText: label,
-          labelStyle: ConstructorTextStyle.lable,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4),
-            borderSide: BorderSide.none,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(4)),
+        ),
+        child: TextField(
+          style: ConstructorTextStyle.inputText,
+          controller: controller,
+          keyboardType: keyboardType,
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.white.withOpacity(0.05),
+            labelText: label,
+            labelStyle: ConstructorTextStyle.lable,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(4),
+              borderSide: BorderSide.none,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(4),
+              borderSide: BorderSide.none,
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(4),
+              borderSide: BorderSide.none,
+            ),
+            prefixIcon: svgAsset != null
+                ? Padding(
+                    padding: EdgeInsets.all(svgSize ?? 16.0),
+                    child: SvgPicture.asset(
+                      svgAsset!,
+                      width: svgSize,
+                      height: svgSize,
+                    ),
+                  )
+                : null,
           ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4),
-            borderSide: BorderSide.none,
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4),
-            borderSide: BorderSide.none,
-          ),
-          prefixIcon: svgAsset != null
-              ? Padding(
-                  padding: EdgeInsets.all(svgSize ?? 16.0),
-                  child: SvgPicture.asset(
-                    svgAsset!,
-                    width: svgSize,
-                    height: svgSize,
-                  ),
-                )
-              : null,
         ),
       ),
     );

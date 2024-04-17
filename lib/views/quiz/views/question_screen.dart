@@ -84,21 +84,26 @@ class _QuestionScreenState extends State<QuestionScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SvgPicture.asset('assets/images/question.svg'),
-            SizedBox(
-              height: size.width * 0.2,
+            SvgPicture.asset(
+              'assets/images/onboarding1.svg',
+              height: size.height * 0.3,
             ),
-            Expanded(
-                child: PageView.builder(
-              itemCount: widget.questions.length,
-              controller: _controller,
-              physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                if (_isQuizFinished) {}
-                final question = widget.questions[index];
-                return buildQuestion(question);
-              },
-            ))
+            SizedBox(
+              height: size.width * 0.01,
+            ),
+            Container(
+              height: size.height * 0.5,
+              child: PageView.builder(
+                itemCount: widget.questions.length,
+                controller: _controller,
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  if (_isQuizFinished) {}
+                  final question = widget.questions[index];
+                  return buildQuestion(question);
+                },
+              ),
+            )
           ],
         ),
       ),
@@ -116,6 +121,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
             Center(
               child: Text(
                 " ${calculateScore()} / ${widget.questions.length}.",
+                style: TextStyle(color: Colors.white),
                 //  style: CategoriesTextStyle.result,
                 textAlign: TextAlign.center,
               ),
@@ -156,7 +162,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
             ),
           ),
           SizedBox(
-            height: size.height * 0.2,
+            height: size.height * 0.05,
           ),
           Expanded(
             child: OptionWidget(
@@ -174,7 +180,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       if (_controller.page!.toInt() ==
                           widget.questions.length - 1) {
                         int score = calculateScore();
-                        // await onQuizCompleted(question.category, score);
+                        //  await onQuizCompleted(question.category, score);
                         setState(() {
                           _isQuizFinished = true;
                         });
@@ -196,15 +202,15 @@ class _QuestionScreenState extends State<QuestionScreen> {
     );
   }
 
-  // Color getColorForOption(Option option, Question question) {
-  //   final isSelected = option == question.selectedOption;
-  //   if (question.isLocked) {
-  //     if (isSelected) {
-  //       return option.isCorrect ? AppColors.lightBlueColor : AppColors.redColor;
-  //     } else if (option.isCorrect) {
-  //       return AppColors.lightBlueColor;
-  //     }
-  //   }
-  //   return AppColors.lightGreyColor;
-  // }
+  Color getColorForOption(Option option, Question question) {
+    final isSelected = option == question.selectedOption;
+    if (question.isLocked) {
+      if (isSelected) {
+        return option.isCorrect ? AppColors.whiteColor : AppColors.redColor;
+      } else if (option.isCorrect) {
+        return AppColors.greenColor;
+      }
+    }
+    return AppColors.peachColor;
+  }
 }

@@ -52,6 +52,14 @@ class NewsWidget extends StatelessWidget {
                       ),
                       SizedBox(
                         height: screenSize.height * 0.005,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Text(
+                          newsModel.text,
+                          maxLines: 2,
+                          style: NewsTextStyle.preview,
+                        ),
                       )
                     ],
                   ),

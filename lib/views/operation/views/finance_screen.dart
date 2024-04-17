@@ -235,28 +235,35 @@ class _FinanceScreenState extends State<FinanceScreen> {
                                     ),
                                     ...dailyOperations.map((op) {
                                       bool isIncome = op['type'] == 'Income';
-                                      return ListTile(
-                                        title: Row(
-                                          children: [
-                                            Column(
-                                              children: [
-                                                Text(
-                                                  '${op['description']} ',
-                                                  // style: FinanceTextStyle.tileTitle,
-                                                  softWrap: false,
-                                                  maxLines: 1,
-                                                  overflow: TextOverflow.fade,
-                                                ),
-                                              ],
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                          border: Border(
+                                            top: BorderSide(
+                                              color:
+                                                  Colors.grey.withOpacity(0.1),
+                                              width: 1.0,
                                             ),
-                                            Spacer(),
-                                            Text(
-                                              '${isIncome ? "+" : "-"}${op['amount']}\$',
-                                              // style: isIncome
-                                              //     ? FinanceTextStyle.tileSumIn
-                                              //     : FinanceTextStyle.tileSumSp,
-                                            )
-                                          ],
+                                          ),
+                                        ),
+                                        child: ListTile(
+                                          title: Row(
+                                            children: [
+                                              Column(
+                                                children: [
+                                                  Text(
+                                                    '${op['description']} ',
+                                                    softWrap: false,
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.fade,
+                                                  ),
+                                                ],
+                                              ),
+                                              Spacer(),
+                                              Text(
+                                                '${isIncome ? "+" : "-"}${op['amount']}\$',
+                                              )
+                                            ],
+                                          ),
                                         ),
                                       );
                                     }).toList(),

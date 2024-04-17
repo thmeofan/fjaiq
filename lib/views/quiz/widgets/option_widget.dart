@@ -18,7 +18,7 @@ class OptionWidget extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Container(
-        height: size.height * 0.3,
+        height: size.height * 0.2,
         child: Column(
           children: question.options
               .map((option) => buildOption(context, option))
@@ -31,8 +31,7 @@ class OptionWidget extends StatelessWidget {
   Widget buildOption(BuildContext context, Option option) {
     final isSelected = option == question.selectedOption;
 
-    final color =
-        option.text == 'true' ? AppColors.greenColor : AppColors.redColor;
+    final color = option.text == 'true' ? AppColors.greenColor : Colors.white30;
 
     final borderColor = isSelected
         ? 'assets/icons/circle_fill.svg'
@@ -51,7 +50,10 @@ class OptionWidget extends StatelessWidget {
           alignment: Alignment.center,
           child: Row(
             children: [
-              SvgPicture.asset(borderColor),
+              SvgPicture.asset(
+                borderColor,
+                color: color,
+              ),
               Text(
                 option.text, // style: CategoriesTextStyle.category
               ),
