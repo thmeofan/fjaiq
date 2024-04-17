@@ -28,8 +28,8 @@ class SettingsTextStyle {
   );
   static const TextStyle back = TextStyle(
     fontFamily: 'Roboto',
-    fontSize: 18.0,
-    fontWeight: FontWeight.w400,
-    color: AppColors.peachColor,
+    fontSize: 16.0,
+    fontWeight: FontWeight.w300,
+    color: Colors.white,
   );
 }

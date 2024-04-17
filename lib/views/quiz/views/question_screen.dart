@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'dart:async';
 import 'dart:ui' as ui;
 import '../../../consts/app_colors.dart';
+import '../../../consts/app_text_styles/settings_text_style.dart';
 import '../../../data/model/quiz_model.dart';
 import '../../app/widgets/chosen_action_button_widget.dart';
 import '../widgets/option_widget.dart';
@@ -56,20 +57,25 @@ class _QuestionScreenState extends State<QuestionScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
       appBar: AppBar(
+        backgroundColor: AppColors.blackColor,
         elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: Text('  widget.questions[0].category,'),
-        centerTitle: true,
+        titleSpacing: -5,
+        title: const Text(
+          'Back',
+          style: SettingsTextStyle.back,
+        ),
+        actions: [Text('$_questionNumber/${widget.questions.length}')],
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
           icon: SvgPicture.asset(
             'assets/icons/leading.svg',
-            width: 24.0,
-            height: 24.0,
+            width: size.width * 0.04,
+            height: size.width * 0.04,
+            // color: Colors.white,
           ),
         ),
       ),
@@ -78,12 +84,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              '$_questionNumber/${widget.questions.length}',
-              //  style: CategoriesTextStyle.title,
-            ),
+            SvgPicture.asset('assets/images/question.svg'),
             SizedBox(
-              height: size.width * 0.1,
+              height: size.width * 0.2,
             ),
             Expanded(
                 child: PageView.builder(
@@ -110,26 +113,11 @@ class _QuestionScreenState extends State<QuestionScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            ClipRect(
-              child: BackdropFilter(
-                filter: ui.ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-                child: Container(
-                  height: size.width * 0.3,
-                  width: size.width * 0.88,
-                  padding: const EdgeInsets.all(16.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.white.withOpacity(0.2),
-                    //  border: Border.all(color: AppColors.whiteColor),
-                  ),
-                  child: Center(
-                    child: Text(
-                      " ${calculateScore()} / ${widget.questions.length}.",
-                      //  style: CategoriesTextStyle.result,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
+            Center(
+              child: Text(
+                " ${calculateScore()} / ${widget.questions.length}.",
+                //  style: CategoriesTextStyle.result,
+                textAlign: TextAlign.center,
               ),
             ),
             SizedBox(
@@ -154,20 +142,8 @@ class _QuestionScreenState extends State<QuestionScreen> {
             child: BackdropFilter(
               filter: ui.ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
               child: Container(
-                height: size.height * 0.3,
+                height: size.height * 0.1,
                 width: size.width * 0.88,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Colors.white.withOpacity(0.2),
-                  // border: Border.all(
-                  //   color: question!.isLocked
-                  //       ? (question.selectedOption?.isCorrect ?? false
-                  //           ? AppColors.lightBlueColor
-                  //           : AppColors.redColor)
-                  //       : AppColors.lightGreyColor,
-                  //   width: 1.5,
-                  // ),
-                ),
                 padding: const EdgeInsets.all(8.0),
                 child: Center(
                   child: Text(

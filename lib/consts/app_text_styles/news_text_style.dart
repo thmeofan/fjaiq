@@ -33,14 +33,14 @@ class NewsTextStyle {
     fontFamily: 'SF Pro Display',
     fontSize: 18.0,
     height: 20 / 18,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w500,
     color: Colors.white,
   );
-  static const TextStyle articleText = TextStyle(
+  static TextStyle articleText = TextStyle(
     fontFamily: 'SF Pro Display',
     fontSize: 14.0,
     height: 20 / 14,
     fontWeight: FontWeight.w300,
-    color: Colors.white,
+    color: Colors.white.withOpacity(0.5),
   );
 }

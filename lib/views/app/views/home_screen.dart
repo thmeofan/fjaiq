@@ -10,7 +10,7 @@ import '../../../data/model/news_model.dart';
 import '../../../data/model/quiz_model.dart';
 import '../../mini_game/views/mini_game_screen.dart';
 import '../../news/views/news_screen.dart';
-import '../../operation/views/operation_screen.dart';
+import '../../operation/views/finance_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

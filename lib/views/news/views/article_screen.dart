@@ -41,9 +41,9 @@ class ArticleScreen extends StatelessWidget {
           children: [
             SizedBox(
               height: screenSize.height * 0.25,
-              width: screenSize.width * 0.9,
+              width: screenSize.width * 0.92,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
+                borderRadius: BorderRadius.circular(5.0),
                 child: FancyShimmerImage(
                   boxFit: BoxFit.cover,
                   imageUrl: newsModel.imageUrl,
@@ -51,35 +51,11 @@ class ArticleScreen extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: screenSize.height * 0.01,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12.0),
-                      //  color: AppColors.blueColor,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Business news',
-                        //  style: NewsTextStyle.business,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: screenSize.height * 0.01,
+              height: screenSize.height * 0.02,
             ),
             Padding(
               padding: EdgeInsets.symmetric(
-                  horizontal: screenSize.width * 0.025,
+                  horizontal: screenSize.width * 0.04,
                   vertical: screenSize.width * 0.01),
               child: Text(
                 newsModel.title,
@@ -95,7 +71,7 @@ class ArticleScreen extends StatelessWidget {
                     //  color: AppColors.darkGreyColor,
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(screenSize.width * 0.025),
+                    padding: EdgeInsets.all(screenSize.width * 0.04),
                     child: Text(
                       newsModel.text,
                       style: NewsTextStyle.articleText,

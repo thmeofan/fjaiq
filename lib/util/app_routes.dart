@@ -10,7 +10,7 @@ import '../views/news/views/article_screen.dart';
 import '../views/onboarding_screen/view/onboarding_screen.dart';
 import '../views/quiz/views/question_screen.dart';
 import '../views/settings/views/settings_screen.dart';
-import '../views/operation/views/operation_screen.dart';
+import '../views/operation/views/finance_screen.dart';
 
 abstract class AppRoutes {
   static const home = 'home';

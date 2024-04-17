@@ -1,15 +1,12 @@
+import 'package:fjaiq/views/onboarding_screen/widgets/introduction_svg_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../blocs/onboarding_cubit/onboarding_cubit.dart';
 import '../../../consts/app_colors.dart';
 import '../../../consts/app_text_styles/onboarding_text_style.dart';
 import '../../../util/app_routes.dart';
 import '../../app/widgets/chosen_action_button_widget.dart';
-import '../widgets/introduction_widget.dart';
-import '../widgets/review_widget.dart';
-import '../widgets/welcome_widget.dart';
 
 class OnboardingScreen extends StatefulWidget {
   final bool? isFirstTime;
@@ -27,32 +24,45 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final CarouselController _carouselController = CarouselController();
   int _current = 0;
 
+  void _onActionButtonTap() {
+    if (_current == 0) {
+      _carouselController.nextPage(
+        duration: Duration(milliseconds: 300),
+        curve: Curves.linear,
+      );
+    } else {
+      context.read<OnboardingCubit>().setFirstTime();
+      Navigator.pushReplacementNamed(context, AppRoutes.home);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      //  extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.transparent,
-        shadowColor: Colors.transparent,
+        backgroundColor: AppColors.blackColor,
       ),
       body: Container(
-        // color: AppColors.blackColor,
+        color: AppColors.blackColor,
         child: Column(
           children: [
             Expanded(
               child: CarouselSlider(
                 items: const [
-                  IntroductionWidget(),
-                  ReviewWidget(),
-                  WelcomeWidget(),
+                  IntroductionSVGWidget(
+                    imagePath: 'assets/images/onboarding1.svg',
+                  ),
+                  IntroductionSVGWidget(
+                    imagePath: 'assets/images/onboarding2.svg',
+                  ),
                 ],
                 carouselController: _carouselController,
                 options: CarouselOptions(
                   height: size.height * 0.6,
                   autoPlay: false,
-                  //  enlargeCenterPage: true,
                   viewportFraction: 1,
                   onPageChanged: (index, reason) {
                     setState(() {
@@ -64,86 +74,54 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
             Container(
               decoration: const BoxDecoration(
-                  //   color: AppColors.blackColor,
+                  color: AppColors.blackColor,
                   borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
-              )),
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                  )),
               width: double.infinity,
-              height: size.height * 0.36,
+              height: size.height * 0.5,
               child: Padding(
                 padding: EdgeInsets.all(size.height * 0.02),
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          _current == 0
-                              ? 'Добро пожаловать!'
-                              : _current == 1
-                                  ? 'Хотите купить жилье? '
-                                  : 'Будьте в курсе новостей!',
-                          style: OnboardingTextStyle.introduction,
-                          textAlign: TextAlign.start,
-                          softWrap: true,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    ),
                     SizedBox(
                       height: size.height * 0.01,
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Flexible(
                           child: Text(
-                            _current == 0
-                                ? 'Рассчитывайте приток денежных средств без особых усилий. Будьте в курсе своего бюджета вместе с нами!'
-                                : _current == 1
-                                    ? 'Рассчитайте ипотечный кредит мгновенно. Укажите сумму, срок и процентную ставку. Начните свой путь к владению жильем!'
-                                    : 'Читайте актуальные статьи о событиях в мире финансов. Присоединяйтесь к нам и управляйте своими финансами!',
-                            style: OnboardingTextStyle.description,
-                            textAlign: TextAlign.start,
+                            _current == 0 ? 'Save money' : 'Check your wallet',
+                            style: OnboardingTextStyle.introduction,
+                            textAlign: TextAlign.center,
                             softWrap: true,
                             overflow: TextOverflow.visible,
                           ),
                         ),
                       ],
                     ),
-                    const Spacer(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(3, (index) {
-                        return AnimatedContainer(
-                          duration: Duration(milliseconds: 200),
-                          curve: Curves.easeInOut,
-                          width: _current == index
-                              ? size.width * 0.075
-                              : size.width * 0.02,
-                          height: size.width * 0.02,
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 1.0, horizontal: 2.0),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
-                            borderRadius:
-                                BorderRadius.circular(size.width * 0.01),
-                            color: _current == index
-                                ? AppColors.whiteColor
-                                : AppColors.redColor,
-                          ),
-                        );
-                      }),
-                    ),
                     SizedBox(
                       height: size.height * 0.01,
                     ),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Flexible(
+                        child: Text(
+                          _current == 0
+                              ? 'Control your money in one place'
+                              : 'In our app you can track your spendings and incomes',
+                          style: OnboardingTextStyle.description,
+                        ),
+                      ),
+                    ]),
+                    const Spacer(),
                     ChosenActionButton(
-                      onTap: () async {
-                        context.read<OnboardingCubit>().setFirstTime();
-                        Navigator.pushReplacementNamed(context, AppRoutes.home);
-                      },
-                      text: 'Продолжить',
+                      onTap: _onActionButtonTap,
+                      text: 'Next',
+                    ),
+                    SizedBox(
+                      height: size.height * 0.035,
                     ),
                   ],
                 ),

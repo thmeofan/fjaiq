@@ -27,7 +27,7 @@ class SettingsTile extends StatelessWidget {
           padding: EdgeInsets.all(16.0),
           decoration: BoxDecoration(
             color: Colors.grey.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(5.0),
           ),
           child: Row(
             children: [

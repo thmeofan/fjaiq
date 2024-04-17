@@ -22,15 +22,17 @@ class NewsWidget extends StatelessWidget {
               .pushNamed(AppRoutes.article, arguments: newsModel);
         },
         child: Container(
-          height: screenSize.height * 0.4,
+          height: screenSize.height * 0.35,
           width: double.maxFinite,
           decoration: BoxDecoration(
             color: AppColors.blackColor,
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(10.0),
-              bottomRight: Radius.circular(10.0),
+              bottomLeft: Radius.circular(5.0),
+              bottomRight: Radius.circular(5.0),
             ),
-            border: Border(top: BorderSide(color: Colors.grey, width: 1.0)),
+            border: Border(
+                top: BorderSide(
+                    color: Colors.grey.withOpacity(0.3), width: 1.0)),
           ),
           child: Column(
             children: [
@@ -56,7 +58,7 @@ class NewsWidget extends StatelessWidget {
                 ),
               ),
               ClipRRect(
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: BorderRadius.circular(5.0),
                 child: FancyShimmerImage(
                   width: screenSize.width,
                   height: screenSize.height * 0.235,

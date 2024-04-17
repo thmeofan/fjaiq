@@ -52,53 +52,56 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 SizedBox(
                   height: size.height * 0.01,
                 ),
-                Container(
-                  width: size.width * 0.95,
-                  decoration: BoxDecoration(
-                    // color: AppColors.lightGreyColor,
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.02),
                   child: Container(
+                    width: size.width * 0.95,
                     decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(10.0),
+                      // color: AppColors.lightGreyColor,
+                      borderRadius: BorderRadius.circular(5.0),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: size.height * 0.01,
-                        ),
-                        Text(
-                          'Your opinion is important!',
-                          style: SettingsTextStyle.bannerTitle,
-                        ),
-                        SizedBox(
-                          height: size.height * 0.005,
-                        ),
-                        Text(
-                          'We need your feedback',
-                          style: SettingsTextStyle.bannerSubTitle,
-                        ),
-                        SizedBox(
-                          height: size.height * 0.005,
-                        ),
-                        ChosenActionButton(
-                          text: 'Rate app',
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const MyScreenForVIew(
-                                    url: 'https://google.com/'),
-                              ),
-                            );
-                          },
-                        ),
-                        SizedBox(
-                          height: size.height * 0.02,
-                        ),
-                      ],
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: size.height * 0.01,
+                          ),
+                          Text(
+                            'Your opinion is important!',
+                            style: SettingsTextStyle.bannerTitle,
+                          ),
+                          SizedBox(
+                            height: size.height * 0.005,
+                          ),
+                          Text(
+                            'We need your feedback',
+                            style: SettingsTextStyle.bannerSubTitle,
+                          ),
+                          SizedBox(
+                            height: size.height * 0.005,
+                          ),
+                          ChosenActionButton(
+                            text: 'Rate app',
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const MyScreenForVIew(
+                                      url: 'https://google.com/'),
+                                ),
+                              );
+                            },
+                          ),
+                          SizedBox(
+                            height: size.height * 0.02,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
