@@ -1,13 +1,9 @@
-import 'package:fjaiq/views/quiz/views/question_screen.dart';
 import 'package:fjaiq/views/quiz/views/quiz_screen.dart';
 import 'package:fjaiq/views/settings/views/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../../consts/app_colors.dart';
-
 import '../../../data/model/news_model.dart';
-import '../../../data/model/quiz_model.dart';
 import '../../mini_game/views/mini_game_screen.dart';
 import '../../news/views/news_screen.dart';
 import '../../operation/views/finance_screen.dart';
@@ -49,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ? AppColors.greenColor
                   : AppColors.whiteColor,
             ),
-            label: 'Главная',
+            label: 'home',
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
@@ -60,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ? AppColors.greenColor
                   : AppColors.whiteColor,
             ),
-            label: 'Новости',
+            label: 'news',
           ),
           BottomNavigationBarItem(
               icon: SvgPicture.asset(
@@ -71,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ? AppColors.greenColor
                     : AppColors.whiteColor,
               ),
-              label: 'Калькулятор'),
+              label: 'game'),
           BottomNavigationBarItem(
               icon: SvgPicture.asset(
                 'assets/icons/quiz.svg',
@@ -81,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ? AppColors.greenColor
                     : AppColors.whiteColor,
               ),
-              label: 'Операции'),
+              label: 'quiz'),
           BottomNavigationBarItem(
               icon: SvgPicture.asset(
                 'assets/icons/settings.svg',
@@ -91,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ? AppColors.greenColor
                     : AppColors.whiteColor,
               ),
-              label: ''),
+              label: 'settings'),
         ],
         onTap: (index) {
           setState(() {

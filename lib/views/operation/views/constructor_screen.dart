@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import '../../../consts/app_colors.dart';
+import '../../../consts/app_text_styles/settings_text_style.dart';
 import '../../app/widgets/chosen_action_button_widget.dart';
 import '../../app/widgets/input_widget.dart';
+import '../widgets/dropdown_widget.dart';
 
 class ConstructorScreen extends StatefulWidget {
   @override
@@ -14,7 +16,7 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
   final _descriptionController = TextEditingController();
   final _amountController = TextEditingController();
   final _dateController = TextEditingController();
-//  final _commentController = TextEditingController();
+
   String _operationType = 'Income';
   List<bool> _isSelected = [true, false];
 
@@ -35,7 +37,6 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
       final description = _descriptionController.text;
       final amount = double.tryParse(_amountController.text);
       final date = _dateController.text;
-      //  final comment = _commentController.text;
 
       if (description.isEmpty || amount == null || date.isEmpty) {
         _showErrorSnackBar('Make sure you filled all the fields');
@@ -49,7 +50,6 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
         'amount': amount,
         'type': _operationType,
         'date': date,
-        //  'comment': comment,
       };
 
       Navigator.of(context).pop(operation);
@@ -63,9 +63,9 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
     final snackBar = SnackBar(
       content: Text(
         message,
-        //  style: TextStyle(color: AppColors.purpleColor),
+        style: TextStyle(color: AppColors.redColor),
       ),
-      // backgroundColor: AppColors.darkGreyColor,
+      backgroundColor: AppColors.lightGreyColor,
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -77,6 +77,29 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
       initialDate: DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2025),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: const ColorScheme.dark(
+              primary: AppColors.blackColor,
+              onPrimary: AppColors.greenColor,
+              surface: AppColors.blackColor,
+              onSurface: Colors.white,
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.white,
+              ),
+            ),
+            textTheme: TextTheme(
+              bodyMedium: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
     if (picked != null) {
       setState(() {
@@ -90,7 +113,7 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
     _descriptionController.dispose();
     _amountController.dispose();
     _dateController.dispose();
-    //  _commentController.dispose();
+
     super.dispose();
   }
 
@@ -103,15 +126,15 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
         elevation: 0,
         titleSpacing: -5,
         title: const Text(
-          'back',
-          // style: SynopsisTextStyle.back,
+          'Back',
+          style: SettingsTextStyle.back,
         ),
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
           icon: SvgPicture.asset(
-            'assets/icons/arrow.svg',
+            'assets/icons/leading.svg',
             width: size.width * 0.04,
             height: size.width * 0.04,
             // color: Colors.white,
@@ -128,39 +151,55 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
                 child: ToggleButtons(
                   isSelected: _isSelected,
                   onPressed: _toggleOperationType,
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.circular(5.0),
                   selectedColor: Colors.white,
                   fillColor: Colors.white.withOpacity(0.25),
                   renderBorder: false,
                   children: <Widget>[
                     Container(
                       padding: EdgeInsets.symmetric(
-                          horizontal: size.width * 0.135,
-                          vertical: size.height * 0.02),
-                      color: _isSelected[0]
-                          ? Colors.white.withOpacity(0.25)
-                          : Colors.grey.withOpacity(0.25),
+                          horizontal: size.width * 0.13,
+                          vertical: size.height * 0.017),
+                      decoration: BoxDecoration(
+                        color: _isSelected[0]
+                            ? AppColors.whiteColor
+                            : AppColors.lightGreyColor,
+                        borderRadius: _isSelected[0]
+                            ? BorderRadius.only(
+                                topRight: Radius.circular(5.0),
+                                bottomRight: Radius.circular(5.0),
+                              )
+                            : BorderRadius.circular(0.0),
+                      ),
                       child: Text(
                         'Income',
                         style: TextStyle(
                           color: _isSelected[0]
-                              ? Colors.white
+                              ? Colors.black
                               : Colors.white.withOpacity(0.35),
                         ),
                       ),
                     ),
                     Container(
                       padding: EdgeInsets.symmetric(
-                          horizontal: size.width * 0.135,
-                          vertical: size.height * 0.02),
-                      color: _isSelected[1]
-                          ? Colors.white.withOpacity(0.25)
-                          : Colors.grey.withOpacity(0.25),
+                          horizontal: size.width * 0.11,
+                          vertical: size.height * 0.017),
+                      decoration: BoxDecoration(
+                        color: _isSelected[1]
+                            ? AppColors.whiteColor
+                            : AppColors.lightGreyColor,
+                        borderRadius: _isSelected[1]
+                            ? BorderRadius.only(
+                                topLeft: Radius.circular(5.0),
+                                bottomLeft: Radius.circular(5.0),
+                              )
+                            : BorderRadius.circular(0.0),
+                      ),
                       child: Text(
                         'Spendings',
                         style: TextStyle(
                           color: _isSelected[1]
-                              ? Colors.white
+                              ? Colors.black
                               : Colors.white.withOpacity(0.35),
                         ),
                       ),
@@ -169,7 +208,7 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
                 ),
               ),
               SizedBox(
-                height: size.height * 0.02,
+                height: size.height * 0.03,
               ),
               Container(
                 height: size.height * 0.8,
@@ -184,9 +223,24 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
                             TextInputType.numberWithOptions(decimal: true),
                         label: 'Enter amount',
                       ),
-                      InputWidget(
-                        controller: _descriptionController,
-                        label: 'Name',
+                      // InputWidget(
+
+                      DropdownWidget(
+                        options: const [
+                          'Salary',
+                          'Freelance',
+                          'Investments',
+                          'Rental Income',
+                          'Side Jobs',
+                          'Bonuses and Awards',
+                          'Passive Income',
+                          'Social Benefits',
+                          'Sales',
+                          'Consulting and Training',
+                        ],
+                        onChanged: (String value) {
+                          _descriptionController.text = value;
+                        },
                       ),
                       GestureDetector(
                         onTap: _pickDate,
@@ -197,7 +251,7 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 16.0),
+                      SizedBox(height: size.height * 0.03),
                       ChosenActionButton(
                         text: 'Make an entry',
                         onTap: _saveOperation,

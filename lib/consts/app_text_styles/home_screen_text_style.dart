@@ -2,55 +2,55 @@ import 'package:flutter/material.dart';
 import '../app_colors.dart';
 
 class HomeScreenTextStyle {
-  static const TextStyle banner = TextStyle(
+  static const TextStyle bannerIncome = TextStyle(
     fontFamily: 'Roboto',
-    fontSize: 18.0,
-    fontWeight: FontWeight.w200,
-    color: Colors.white,
-  );
-  static TextStyle address = TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: 14.0,
+    fontSize: 20.0,
     fontWeight: FontWeight.w400,
-    color: Colors.white,
+    color: AppColors.greenColor,
   );
-  static const TextStyle appbar = TextStyle(
+  static TextStyle bannerSpendings = TextStyle(
     fontFamily: 'Roboto',
-    fontSize: 18.0,
-    fontWeight: FontWeight.w500,
-    color: AppColors.peachColor,
+    fontSize: 20.0,
+    fontWeight: FontWeight.w400,
+    color: AppColors.whiteColor,
+  );
+  static TextStyle bannerTitle = TextStyle(
+    fontFamily: 'Roboto',
+    fontSize: 16.0,
+    fontWeight: FontWeight.w400,
+    color: AppColors.whiteColor.withOpacity(0.5),
   );
   static const TextStyle name = TextStyle(
       fontFamily: 'Roboto',
       fontSize: 20.0,
       fontWeight: FontWeight.w700,
       color: Colors.white);
-  static const TextStyle typePerfect = TextStyle(
+  static const TextStyle titleName = TextStyle(
       fontFamily: 'Roboto',
-      fontSize: 18.0,
-      fontWeight: FontWeight.w400,
-      color: AppColors.greenColor);
-  static const TextStyle typeAverage = TextStyle(
+      fontSize: 16.0,
+      fontWeight: FontWeight.w300,
+      color: AppColors.whiteColor);
+  static TextStyle titleDate = TextStyle(
       fontFamily: 'Roboto',
-      fontSize: 18.0,
-      fontWeight: FontWeight.w400,
-      color: AppColors.orangeColor);
+      fontSize: 14.0,
+      fontWeight: FontWeight.w300,
+      color: AppColors.whiteColor.withOpacity(0.5));
   static const TextStyle typeBad = TextStyle(
       fontFamily: 'Roboto',
       fontSize: 18.0,
       fontWeight: FontWeight.w400,
       color: AppColors.redColor);
-  static const TextStyle restock = TextStyle(
+  static const TextStyle income = TextStyle(
       fontFamily: 'Roboto',
       fontSize: 14.0,
       fontWeight: FontWeight.w400,
-      color: Colors.orange);
-  static const TextStyle location = TextStyle(
+      color: AppColors.greenColor);
+  static const TextStyle spending = TextStyle(
       fontFamily: 'Roboto',
       fontSize: 14.0,
-      fontWeight: FontWeight.w500,
-      color: Colors.grey);
-  static TextStyle info = const TextStyle(
+      fontWeight: FontWeight.w400,
+      color: AppColors.whiteColor);
+  static TextStyle score = const TextStyle(
     fontFamily: 'Roboto',
     fontSize: 16.0,
     fontWeight: FontWeight.w300,

@@ -38,17 +38,23 @@ class ArticleScreen extends StatelessWidget {
       body: Container(
         color: AppColors.blackColor,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: screenSize.height * 0.25,
-              width: screenSize.width * 0.92,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(5.0),
-                child: FancyShimmerImage(
-                  boxFit: BoxFit.cover,
-                  imageUrl: newsModel.imageUrl,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: screenSize.height * 0.25,
+                  width: screenSize.width * 0.92,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5.0),
+                    child: FancyShimmerImage(
+                      boxFit: BoxFit.cover,
+                      imageUrl: newsModel.imageUrl,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
             SizedBox(
               height: screenSize.height * 0.02,

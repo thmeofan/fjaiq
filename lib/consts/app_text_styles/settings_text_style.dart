@@ -10,9 +10,9 @@ class SettingsTextStyle {
   );
   static const TextStyle title = TextStyle(
     fontFamily: 'Inter',
-    fontSize: 32.0,
-    fontWeight: FontWeight.w500,
-    color: Colors.white,
+    fontSize: 26.0,
+    fontWeight: FontWeight.w400,
+    color: AppColors.whiteColor,
   );
   static const TextStyle bannerTitle = TextStyle(
     fontFamily: 'Inter',

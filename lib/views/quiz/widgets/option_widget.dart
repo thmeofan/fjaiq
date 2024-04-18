@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../consts/app_colors.dart';
+import '../../../consts/app_text_styles/categories_text_style.dart';
 import '../../../data/model/quiz_model.dart';
 
-class OptionWidget extends StatelessWidget {
+class OptionWidget extends StatefulWidget {
   const OptionWidget({
     super.key,
     required this.question,
@@ -14,13 +16,20 @@ class OptionWidget extends StatelessWidget {
   final ValueChanged<Option> onClickedOption;
 
   @override
+  State<OptionWidget> createState() => _OptionWidgetState();
+}
+
+class _OptionWidgetState extends State<OptionWidget> {
+  final _stateKey = GlobalKey<_OptionWidgetState>();
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Container(
-        height: size.height * 0.2,
+        height: size.height * 0.35,
         child: Column(
-          children: question.options
+          children: widget.question.options
               .map((option) => buildOption(context, option))
               .toList(),
         ),
@@ -29,19 +38,32 @@ class OptionWidget extends StatelessWidget {
   }
 
   Widget buildOption(BuildContext context, Option option) {
-    final isSelected = option == question.selectedOption;
+    final isSelected = option == widget.question.selectedOption;
+    final isCorrect =
+        widget.question.isLocked && isSelected && option.isCorrect;
+    final isIncorrect =
+        widget.question.isLocked && isSelected && !option.isCorrect;
 
-    final color = option.text == 'true' ? AppColors.greenColor : Colors.white30;
+    final color = isCorrect
+        ? AppColors.greenColor
+        : isIncorrect
+            ? AppColors.redColor
+            : option.text == 'true'
+                ? AppColors.greenColor
+                : AppColors.whiteColor;
 
-    final borderColor = isSelected
+    final borderIcon = isSelected
         ? 'assets/icons/circle_fill.svg'
         : 'assets/icons/circle_check.svg';
 
     return Expanded(
       child: GestureDetector(
         onTap: () {
-          if (!question.isLocked) {
-            onClickedOption(option);
+          if (!widget.question.isLocked) {
+            widget.onClickedOption(option);
+            Future.delayed(Duration(milliseconds: 500), () {
+              _stateKey.currentState?.setState(() {});
+            });
           }
         },
         child: Container(
@@ -51,11 +73,16 @@ class OptionWidget extends StatelessWidget {
           child: Row(
             children: [
               SvgPicture.asset(
-                borderColor,
+                borderIcon,
                 color: color,
               ),
-              Text(
-                option.text, // style: CategoriesTextStyle.category
+              SizedBox(width: 8.0),
+              Flexible(
+                child: Text(
+                  option.text,
+                  style: CategoriesTextStyle.category.copyWith(color: color),
+                  overflow: TextOverflow.visible,
+                ),
               ),
             ],
           ),

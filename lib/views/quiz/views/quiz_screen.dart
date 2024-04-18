@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../consts/app_colors.dart';
-import '../../../consts/app_text_styles/home_screen_text_style.dart';
+import '../../../consts/app_text_styles/categories_text_style.dart';
 import '../../../consts/app_text_styles/settings_text_style.dart';
 import '../../../data/model/quiz_model.dart';
 
@@ -58,19 +58,24 @@ class QuizScreen extends StatelessWidget {
               height: size.height * 0.3,
             ),
             SizedBox(
-              height: size.height * 0.02,
+              height: size.height * 0.03,
             ),
-            Text(
-              'Check how much you know about finance',
-              style: HomeScreenTextStyle.emptyTitle,
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Check how much you know about finance',
+                style: CategoriesTextStyle.resultSubtitle,
+                textAlign: TextAlign.center,
+              ),
             ),
-            SizedBox(
-              height: size.height * 0.01,
-            ),
+            Spacer(),
             ChosenActionButton(
               text: 'Start',
               onTap: () => navigateToQuiz(context, questions),
-            )
+            ),
+            SizedBox(
+              height: size.height * 0.03,
+            ),
           ],
         ),
       ),

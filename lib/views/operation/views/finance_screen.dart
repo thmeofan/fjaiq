@@ -5,9 +5,7 @@ import 'package:intl/intl.dart';
 import '../../../consts/app_colors.dart';
 import '../../../consts/app_text_styles/home_screen_text_style.dart';
 import '../../../consts/app_text_styles/settings_text_style.dart';
-import '../../../util/app_routes.dart';
 import '../../../util/shared_pref_service.dart';
-import '../../app/widgets/chosen_action_button_widget.dart';
 import 'constructor_screen.dart';
 
 class FinanceScreen extends StatefulWidget {
@@ -34,18 +32,6 @@ class _FinanceScreenState extends State<FinanceScreen> {
       operations.add(operation);
     });
     await SharedPreferencesService.saveOperations(operations);
-  }
-
-  double get _totalForYear {
-    double total = 0;
-    operations.forEach((op) {
-      if (op['type'] == 'Income') {
-        total += op['amount'];
-      } else {
-        total -= op['amount'];
-      }
-    });
-    return total;
   }
 
   double get _totalIncome {
@@ -93,10 +79,9 @@ class _FinanceScreenState extends State<FinanceScreen> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
-                  // color: AppColors.darkGreyColor,
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Row(
@@ -108,7 +93,7 @@ class _FinanceScreenState extends State<FinanceScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 5),
                   ],
                 ),
               ),
@@ -122,7 +107,6 @@ class _FinanceScreenState extends State<FinanceScreen> {
                         borderRadius: BorderRadius.only(
                             topRight: Radius.circular(15),
                             topLeft: Radius.circular(15)),
-                        //  color: AppColors.darkGreyColor,
                       ),
                       child: Column(
                         children: [
@@ -130,84 +114,94 @@ class _FinanceScreenState extends State<FinanceScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
                               Expanded(
-                                child: Container(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 16),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    color: Colors.black,
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 6.0,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 15),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                      color: AppColors.lightGreyColor,
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 6.0,
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                'Incomes',
+                                                style: HomeScreenTextStyle
+                                                    .bannerTitle,
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              Spacer(),
+                                              Image.asset(
+                                                'assets/icons/input.png',
+                                                color: AppColors.greenColor,
+                                              )
+                                            ],
+                                          ),
                                         ),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              'Incomes',
-                                              //  style: FinanceTextStyle.bannerTitles,
-                                              textAlign: TextAlign.center,
-                                            ),
-                                            Spacer(),
-                                            Image.asset(
-                                              'assets/icons/input.png',
-                                              color: AppColors.greenColor,
-                                            )
-                                          ],
+                                        SizedBox(
+                                          height: 8,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 8,
-                                      ),
-                                      Text(
-                                        '+ $_totalIncome \$',
-                                        style: TextStyle(
-                                            color: AppColors.greenColor),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ],
+                                        Text(
+                                          '+ $_totalIncome \$',
+                                          style:
+                                              HomeScreenTextStyle.bannerIncome,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
                               SizedBox(width: 8),
                               Expanded(
-                                child: Container(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 16),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    color: Colors.black,
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 6.0,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 16),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                      color: AppColors.lightGreyColor
+                                          .withOpacity(0.4),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 6.0,
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                'Spendings',
+                                                style: HomeScreenTextStyle
+                                                    .bannerTitle,
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              Spacer(),
+                                              Image.asset(
+                                                  'assets/icons/output.png')
+                                            ],
+                                          ),
                                         ),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              'Spendings',
-                                              //  style: FinanceTextStyle.bannerTitles,
-                                              textAlign: TextAlign.center,
-                                            ),
-                                            Spacer(),
-                                            Image.asset(
-                                                'assets/icons/output.png')
-                                          ],
+                                        const SizedBox(
+                                          height: 8,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 8,
-                                      ),
-                                      Text(
-                                        '- $_totalSpendings \$',
-                                        style: TextStyle(color: Colors.white),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ],
+                                        Text(
+                                          '- $_totalSpendings \$',
+                                          style: HomeScreenTextStyle
+                                              .bannerSpendings,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -225,13 +219,12 @@ class _FinanceScreenState extends State<FinanceScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding: const EdgeInsets.all(12.0),
                                       child: Text(
-                                        DateFormat('MMMM d, yyyy').format(
-                                            DateFormat('yyyy-MM-dd')
-                                                .parse(date)),
-                                        //  style: FinanceTextStyle.date
-                                      ),
+                                          DateFormat('MMMM d, yyyy').format(
+                                              DateFormat('yyyy-MM-dd')
+                                                  .parse(date)),
+                                          style: HomeScreenTextStyle.titleDate),
                                     ),
                                     ...dailyOperations.map((op) {
                                       bool isIncome = op['type'] == 'Income';
@@ -239,30 +232,41 @@ class _FinanceScreenState extends State<FinanceScreen> {
                                         decoration: BoxDecoration(
                                           border: Border(
                                             top: BorderSide(
-                                              color:
-                                                  Colors.grey.withOpacity(0.1),
+                                              color: AppColors.whiteColor
+                                                  .withOpacity(0.1),
                                               width: 1.0,
                                             ),
                                           ),
                                         ),
-                                        child: ListTile(
-                                          title: Row(
-                                            children: [
-                                              Column(
-                                                children: [
-                                                  Text(
-                                                    '${op['description']} ',
-                                                    softWrap: false,
-                                                    maxLines: 1,
-                                                    overflow: TextOverflow.fade,
-                                                  ),
-                                                ],
-                                              ),
-                                              Spacer(),
-                                              Text(
-                                                '${isIncome ? "+" : "-"}${op['amount']}\$',
-                                              )
-                                            ],
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(2.0),
+                                          child: ListTile(
+                                            title: Row(
+                                              children: [
+                                                Column(
+                                                  children: [
+                                                    Text(
+                                                      '${op['description']} ',
+                                                      softWrap: false,
+                                                      maxLines: 1,
+                                                      overflow:
+                                                          TextOverflow.fade,
+                                                      style: HomeScreenTextStyle
+                                                          .titleName,
+                                                    ),
+                                                  ],
+                                                ),
+                                                Spacer(),
+                                                Text(
+                                                  '${isIncome ? "+" : "-"}${op['amount']}\$',
+                                                  style: isIncome
+                                                      ? HomeScreenTextStyle
+                                                          .income
+                                                      : HomeScreenTextStyle
+                                                          .spending,
+                                                )
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       );
@@ -311,9 +315,11 @@ class _FinanceScreenState extends State<FinanceScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        shape: CircleBorder(),
+        shape: const CircleBorder(),
         backgroundColor: AppColors.greenColor,
-        child: Icon(Icons.add, color: Colors.white),
+        child: const Icon(
+          Icons.add,
+        ),
         onPressed: () async {
           final result = await Navigator.push(
             context,

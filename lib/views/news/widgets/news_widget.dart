@@ -32,7 +32,9 @@ class NewsWidget extends StatelessWidget {
             ),
             border: Border(
                 top: BorderSide(
-                    color: Colors.grey.withOpacity(0.3), width: 1.0)),
+              color: AppColors.whiteColor.withOpacity(0.1),
+              width: 1.0,
+            )),
           ),
           child: Column(
             children: [

@@ -23,7 +23,7 @@ class NewsScreen extends StatelessWidget {
           child: Column(children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: size.height * 0.018),
-              child: Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(

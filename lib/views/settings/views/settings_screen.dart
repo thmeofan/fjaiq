@@ -4,7 +4,6 @@ import '../../../consts/app_colors.dart';
 import '../../../consts/app_text_styles/settings_text_style.dart';
 import '../../app/views/my_in_app_web_view.dart';
 import '../../app/widgets/chosen_action_button_widget.dart';
-import '../widgets/ios_toggle.dart';
 import '../widgets/settings_widget.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -29,7 +28,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: AppColors.blackColor,
@@ -42,9 +40,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                SizedBox(
-                  height: size.height * 0.1,
-                ),
                 Text(
                   'Settings',
                   style: SettingsTextStyle.title,
@@ -69,16 +64,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SizedBox(
-                            height: size.height * 0.01,
+                            height: size.height * 0.03,
                           ),
-                          Text(
+                          const Text(
                             'Your opinion is important!',
                             style: SettingsTextStyle.bannerTitle,
                           ),
                           SizedBox(
                             height: size.height * 0.005,
                           ),
-                          Text(
+                          const Text(
                             'We need your feedback',
                             style: SettingsTextStyle.bannerSubTitle,
                           ),

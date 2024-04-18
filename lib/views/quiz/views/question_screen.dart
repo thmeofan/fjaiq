@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'dart:async';
 import 'dart:ui' as ui;
 import '../../../consts/app_colors.dart';
+import '../../../consts/app_text_styles/categories_text_style.dart';
 import '../../../consts/app_text_styles/settings_text_style.dart';
 import '../../../data/model/quiz_model.dart';
 import '../../app/widgets/chosen_action_button_widget.dart';
@@ -57,7 +58,6 @@ class _QuestionScreenState extends State<QuestionScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      // extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: AppColors.blackColor,
         elevation: 0,
@@ -113,22 +113,43 @@ class _QuestionScreenState extends State<QuestionScreen> {
   Widget buildQuestion(Question? question) {
     Size size = MediaQuery.of(context).size;
     if (_isQuizFinished) {
+      String resultText;
+      int score = calculateScore();
+      if (score == widget.questions.length) {
+        resultText =
+            'You have successfully answered all the questions, way to go!';
+      } else if (score > 10) {
+        resultText = 'You have a good grasp of the basics!';
+      } else {
+        resultText = 'You\'ll definitely make it next time';
+      }
+
       return Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            SizedBox(
+              height: size.height * 0.015,
+            ),
             Center(
               child: Text(
-                " ${calculateScore()} / ${widget.questions.length}.",
-                style: TextStyle(color: Colors.white),
-                //  style: CategoriesTextStyle.result,
+                '$score/${widget.questions.length}',
+                style: CategoriesTextStyle.result,
                 textAlign: TextAlign.center,
               ),
             ),
             SizedBox(
-              height: size.height * 0.3,
+              height: size.height * 0.01,
             ),
+            Center(
+              child: Text(
+                resultText,
+                style: CategoriesTextStyle.resultSubtitle,
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Spacer(),
             ChosenActionButton(
               text: 'Continue',
               onTap: () {
@@ -154,7 +175,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                 child: Center(
                   child: Text(
                     question!.text,
-                    //   style: CategoriesTextStyle.question,
+                    style: CategoriesTextStyle.question,
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -179,8 +200,6 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     Future.delayed(Duration(seconds: 1), () async {
                       if (_controller.page!.toInt() ==
                           widget.questions.length - 1) {
-                        int score = calculateScore();
-                        //  await onQuizCompleted(question.category, score);
                         setState(() {
                           _isQuizFinished = true;
                         });

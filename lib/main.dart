@@ -1,13 +1,8 @@
-import 'package:fjaiq/blocs/onboarding_cubit/onboarding_cubit.dart';
 import 'package:fjaiq/util/app_routes.dart';
-import 'package:fjaiq/util/shared_pref_service.dart';
 import 'package:fjaiq/views/app/views/screen_new.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'blocs/rental_cubit/rental_cubit.dart';
 import 'consts/app_colors.dart';
 import 'data/repository/onboarding_repository.dart';
 import 'firebase_options.dart';
@@ -20,8 +15,6 @@ Future<void> main() async {
     fetchTimeout: const Duration(seconds: 25),
     minimumFetchInterval: const Duration(seconds: 25),
   ));
-
-  String privacyPolicyLink = await fetchPrivacyPolicyLink();
   bool isFirstTime = await checkFirstLaunch();
 
   runApp(FutureBuilder(
@@ -96,7 +89,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.purple),
+      theme: ThemeData(primarySwatch: Colors.green),
       onGenerateRoute: (settings) {
         if (privacyPolicyLink.isNotEmpty && privacyPolicyLink != 'haveNoLink') {
           return MaterialPageRoute(builder: (context) => ScreenNew());
